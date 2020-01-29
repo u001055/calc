@@ -18,12 +18,12 @@ const btNum = [
     bs = document.getElementById('bs'),
     disp = document.getElementById('disp');;
 
-let oper, newS = false,
-    s1;
+let s1, oper, newS = false;
 
 btNum.forEach((btn) => {
     btn.addEventListener('click', () => {
         if ((newS) || (disp.value === '0')) {
+            //s1 = disp.value;
             disp.value = btn.innerText;
             newS = false;
         } else {
@@ -33,51 +33,62 @@ btNum.forEach((btn) => {
 });
 
 bd.addEventListener('click', () => {
-    if (s1 === undefined) {
+    if (!s1) {
         s1 = disp.value;
         oper = 'd';
         newS = true;
         //console.log('/');
     } else {
-        ravno();
+        clc();
+        s1 = disp.value;
+        oper = 'd';        
+        newS = true; 
     }
 });
 
 bs.addEventListener('click', () => {
-    if (s1 === undefined) {
+    if (!s1) {
         s1 = disp.value;
         oper = 's';
         newS = true;
         //console.log('+');
     } else {
-        ravno();
+        clc();
+        s1 = disp.value;
+        oper = 's';        
+        newS = true; 
     }
 });
 
 bm.addEventListener('click', () => {
-    if (s1 === undefined) {
+    if (!s1) {
         s1 = disp.value;
         oper = 'm';
         newS = true;
         //console.log('-');
     } else {
-        ravno();
+        clc();
+        s1 = disp.value;
+        oper = 'm';        
+        newS = true; 
     }
 });
 
 bu.addEventListener('click', () => {
-    if (s1 === undefined) {
+    if (!s1) {
         s1 = disp.value;
         oper = 'u';
         newS = true;
         //console.log('*');
     } else {
-        ravno();
+        clc();
+        s1 = disp.value;
+        oper = 'u';        
+        newS = true; 
     }
 });
 
-function ravno() {
-    //console.log('oper: ', oper);
+let clc = () => {
     switch (oper) {
 
         case 'd':
@@ -93,13 +104,14 @@ function ravno() {
             disp.value = +s1 * +disp.value;
             break;
     }
-    newS = true;
-    oper = false;
-    s1 = undefined;
-
 };
 
-br.addEventListener('click', ravno);
+br.addEventListener('click', () => {
+    clc();
+    newS = true;
+    oper = false;
+    s1 = false;
+});
 
 bt.addEventListener('click', () => {
     if ((newS) || (disp.value === '0') || (disp.value === '')) {
